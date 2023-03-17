@@ -1,0 +1,18 @@
+{
+  "name": "agencykit-11ty-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eleventy.js",
+  "dependencies": {
+    "@agency-kit/notion-cms": "file:../notion-cms",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

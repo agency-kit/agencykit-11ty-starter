@@ -1,0 +1,16 @@
+---
+pagination:
+  data: collections.pages
+  size: 7
+  alias: pages
+layout: 'layouts/base.njk'
+permalink: '/{{ page.name }}/'
+---
+
+{% block content %}
+<ul class="post-feed">
+  {% for page in pages %}
+  <li>{{ page.name }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
