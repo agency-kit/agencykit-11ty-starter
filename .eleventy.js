@@ -7,13 +7,12 @@ const notion = new NotionCMS({
   notionAPIKey: process.env.NOTION_API
 })
 
+const filterPosts = 
+  posts => Object.entries(posts)
+    .filter(([key, value]) => key.startsWith('/'))
+    .map(e => e[1])
 
 module.exports = function (config) {
-  config.addPassthroughCopy({ public: './' })
-
-  config.setBrowserSyncConfig({
-    files: ['dist/**/*'],
-  })
 
   config.addCollection("pages", async function () {
     let collection = await notion.fetch()
@@ -21,17 +20,23 @@ module.exports = function (config) {
     return Object.values(posts)
   })
 
-  // Get all posts
   config.addCollection("posts", async function () {
     let collection = await notion.fetch()
     const posts = collection.siteData['/posts']
-    const filteredPosts = Object.entries(posts).filter(([key, value]) => {
-      if (key.startsWith('/')) return true
-    }).map(e => e[1])
-    return filteredPosts;
+    return filterPosts(posts);
   });
+
+  config.addCollection("team", async function() {
+    let collection = await notion.fetch()
+    const team = collection.siteData['/team']
+    return filterPosts(team)
+  })
 
   return {
     templateFormats: ['md', 'njk', 'jpg', 'png', 'gif'],
+    dir: {
+      input: "src",
+      includes: "../_includes"
+    }
   }
 }

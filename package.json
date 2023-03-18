@@ -4,7 +4,7 @@
   "description": "",
   "main": ".eleventy.js",
   "dependencies": {
-    "@agency-kit/notion-cms": "file:../notion-cms",
+    "@agency-kit/notion-cms": "^0.1.2",
     "dotenv": "^16.0.3"
   },
   "devDependencies": {

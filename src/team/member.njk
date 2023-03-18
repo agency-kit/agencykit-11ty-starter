@@ -1,0 +1,11 @@
+---
+pagination:
+  data: collections.team
+  size: 1
+  alias: member
+  addAllPagesToCollections: true
+layout: 'layouts/base.njk'
+permalink: '/team/{{ member.name }}/'
+---
+
+{{ member.content | safe if member.content else "Team Member content not found" }}
