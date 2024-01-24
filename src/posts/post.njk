@@ -5,7 +5,7 @@ pagination:
   alias: post
   addAllPagesToCollections: true
 layout: 'layouts/base.njk'
-permalink: '/posts/{{ post.name }}/'
+permalink: '/posts/{{ post.slug }}/'
 ---
 
-{{ post.content | safe if post.content else "Post content not found" }}
+{{ post.content.html | safe if post.content.html else "Post content not found" }}

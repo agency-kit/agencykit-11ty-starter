@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": ".eleventy.js",
+  "type": "module",
   "dependencies": {
-    "@agency-kit/notion-cms": "^0.1.2",
-    "dotenv": "^16.0.3"
+    "@agency-kit/notion-cms": "^0.9.x"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.0"
+    "@11ty/eleventy": "3.0.0-alpha.4"
   },
   "scripts": {
+    "serve": "env $(cat .env | xargs) npx @11ty/eleventy --serve",
+    "watch": "npx @11ty/eleventy --watch",
+    "build": "npx @11ty/eleventy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

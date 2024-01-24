@@ -1,16 +1,13 @@
 ---
 pagination:
-  data: collections.pages
-  size: 7
-  alias: pages
+  data: collections.all
+  size: 1
+  alias: page
 layout: 'layouts/base.njk'
-permalink: '/{{ page.name }}/'
+permalink: '{{ page.path }}'
 ---
 
-{% block content %}
-<ul class="post-feed">
-  {% for page in pages %}
-  <li>{{ page.name }}</li>
-  {% endfor %}
-</ul>
-{% endblock %}
+<div>Page</div>
+
+{{ collections.all | dump }}
+{{ page.content.html | safe if page.content.html else "page content not found" }}
