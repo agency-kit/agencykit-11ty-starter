@@ -1,13 +1,32 @@
 ---
 pagination:
-  data: collections.all
+  data: collections.combined
   size: 1
   alias: page
 layout: 'layouts/base.njk'
-permalink: '{{ page.path }}'
+permalink: '{{page.path}}/'
 ---
 
-<div>Page</div>
+{% if page.content.html %}
+  {{ page.content.html | safe if page.content.html else "page content not found" }}
+{% endif %}
 
-{{ collections.all | dump }}
-{{ page.content.html | safe if page.content.html else "page content not found" }}
+<small>{{page.name}}</small>
+
+<ul>
+  {% for item in collections[page.slug] %}
+  <li>
+    <a href="{{item.path}}">{{item.name}}</a>
+  </li>
+{% endfor %}
+</ul>
+
+<small>menu</small>
+<ul>
+  {% for item in collections.nav %}
+  <li>
+    <a href="{{item.path}}">{{item.name}}</a>
+  </li>
+{% endfor %}
+</ul>
+

@@ -15,16 +15,28 @@ const notion = new NotionCMS({
 export default async function (config) {
   await notion.fetch();
 
+  const pageCollection = new Set();
+  const navCollection = new Set();
+
   notion.walk(node => {
+    // for quickly building all pages in the db, we collect them all.
+    pageCollection.add(node);
     // If the collection has been added, skip it.
     if (Object.keys(config.collections).some(key => key === node.slug)) return;
     // We want only the current path's pages
     const pages = notion.filterSubPages(node.path);
-    // We only want collections when there are items in it ie not a leaf node.
-    if (pages.length >= 1) config.addCollection(node.slug, () => pages);
+    // We only want collections when there are items in it ie not a leaf node, for individual collections
+    if (pages.length >= 1) {
+      navCollection.add(node);
+      config.addCollection(node.slug, () => pages);
+    }
   })
 
-  // Add collections by tags?
+  config.addCollection('combined', () => Array.from(pageCollection).flatMap(page=>page));
+
+  config.addCollection('nav', () => Array.from(navCollection).flatMap(page=>page));
+
+  // TODO: Add collections by tags?
 
   return {
     templateFormats: ['md', 'njk'],
