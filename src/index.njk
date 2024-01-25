@@ -1,16 +1,32 @@
 ---
 pagination:
-  data: collections.pages
-  size: 7
-  alias: pages
+  data: collections.combined
+  size: 1
+  alias: page
 layout: 'layouts/base.njk'
-permalink: '/{{ page.name }}/'
+permalink: '{{page.path}}/'
 ---
 
-{% block content %}
-<ul class="post-feed">
-  {% for page in pages %}
-  <li>{{ page.name }}</li>
-  {% endfor %}
+{% if page.content.html %}
+  {{ page.content.html | safe if page.content.html else "page content not found" }}
+{% endif %}
+
+<small>{{page.name}}</small>
+
+<ul>
+  {% for item in collections[page.slug] %}
+  <li>
+    <a href="{{item.path}}">{{item.name}}</a>
+  </li>
+{% endfor %}
 </ul>
-{% endblock %}
+
+<small>menu</small>
+<ul>
+  {% for item in collections.nav %}
+  <li>
+    <a href="{{item.path}}">{{item.name}}</a>
+  </li>
+{% endfor %}
+</ul>
+
