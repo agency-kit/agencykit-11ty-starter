@@ -42,6 +42,7 @@ export default async function (config) {
     templateFormats: ['md', 'njk'],
     dir: {
       input: "src",
+      data: "../_data",
       includes: "../_includes"
     }
   }
