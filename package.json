@@ -1,17 +1,18 @@
 {
   "name": "agencykit-11ty-starter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": ".eleventy.js",
   "type": "module",
   "dependencies": {
-    "@agency-kit/notion-cms": "^0.9.x"
+    "@agency-kit/notion-cms": "^0.9.x",
+    "dotenv": "^16.4.1"
   },
   "devDependencies": {
     "@11ty/eleventy": "3.0.0-alpha.4"
   },
   "scripts": {
-    "serve": "env $(cat .env | xargs) npx @11ty/eleventy --serve",
+    "serve": "npx @11ty/eleventy --serve",
     "watch": "npx @11ty/eleventy --watch",
     "build": "npx @11ty/eleventy",
     "test": "echo \"Error: no test specified\" && exit 1"
