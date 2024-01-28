@@ -1,19 +1,43 @@
-import NotionCMS from "@agency-kit/notion-cms";
+import NotionCMS, {Head, Linker, Images} from "@agency-kit/notion-cms";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const notion = new NotionCMS({
-  // big detector version
-  databaseId: 'e4fcd5b3-1d6a-4afd-b951-10d56ce436ad', 
-  // Simple Jacob's blog version.
-  // databaseId: '41b200f0-495f-44bd-956d-d4830c826d5d', 
+  // Sample db, see here: https://cooked-shovel-3c3.notion.site/NotionCMS-Quickstart-Database-Template-719f1f9d1547465d96bcd7e80333c831?pvs=4
+  databaseId: process.env.NOTION_DB_ID, // Demo using b29a7fb3-f35f-49ad-b9ee-2b759cab961c and just add your API Key
   notionAPIKey: process.env.NOTION_API,
-  localCacheDirectory: `${process.cwd()}/lc/`,
-  draftMode: true,
+  localCacheDirectory: `${process.cwd()}/lc/`, // Defaults to tucked in node_modules, but put it anywhere
+  draftMode: true, // turn off for PROD
+  // rootAlias: '/home' // if your db is structured with a single root page, this converts it's name, '/home' -> '/'.
   refreshTimeout: '1 hour',
-  // rootAlias: '/home-page'
+  plugins: [
+    // add metaTitle and metaDescription to your DB. Access them at meta.title and meta.description: https://www.agencykit.so/notion-cms/plugins/core-plugins/head-seo/
+    Head(),
+    // automatically converts links in Notion to links to the right paths: https://www.agencykit.so/notion-cms/plugins/core-plugins/linker/
+    Linker(),
+    // automatically downloads and caches Notion images: https://www.agencykit.so/notion-cms/plugins/core-plugins/images/
+    Images(),
+    // Custom NotionCMS plugin: see https://www.agencykit.so/notion-cms/plugins/building-a-plugin/
+    {
+      // Add a 'Layout' property to your database. Any layout name string maps to your custom layout in layouts/your-layout-name.njk
+      // Default is base.njk if no custom layout is specified.
+      name: 'layouts',
+      hook: 'during-tree',
+      exec: pageContent => {
+        let layoutString = pageContent?.otherProps?.Layout?.rich_text[0]?.text?.content || "base"
+        // Slugify
+        layoutString.toLowerCase()
+          .replace(/[^\w-]+/g, '')
+          .replace(/ +/g, '-');
+        Object.assign(pageContent, { Layout: `layouts/${layoutString}.njk` })
+        return pageContent
+      }
+    }],
 });
 
 export default async function (config) {
-  await notion.fetch();
+  await notion.pull();
 
   const pageCollection = new Set();
   const navCollection = new Set();
@@ -32,11 +56,11 @@ export default async function (config) {
     }
   })
 
-  config.addCollection('combined', () => Array.from(pageCollection).flatMap(page=>page));
+  config.addCollection('combined', () => Array.from(pageCollection).flatMap(page => page));
 
-  config.addCollection('nav', () => Array.from(navCollection).flatMap(page=>page));
+  config.addCollection('nav', () => Array.from(navCollection).flatMap(page => page));
 
-  // TODO: Add collections by tags?
+  // TODO: Add collections by tags
 
   return {
     templateFormats: ['md', 'njk'],

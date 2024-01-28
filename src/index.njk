@@ -3,29 +3,36 @@ pagination:
   data: collections.combined
   size: 1
   alias: page
-permalink: '{{page.path}}/'
+permalink: '{{  page.path }}/'
+eleventyComputed:
+  title: "{{ page.meta.title }}"
+  description: "{{ page.meta.description }}"
+  layout: "{{ page.Layout }}"
 ---
 
+<h1>{{page.name}}</h1>
+<hr>
 {% if page.content.html %}
-  {{ page.content.html | safe if page.content.html else "page content not found" }}
+  {{ page.content.html | safe }}
 {% endif %}
 
-<small>{{page.name}}</small>
-
+<small><u>Child pages</u></small>
 <ul>
   {% for item in collections[page.slug] %}
-  <li>
-    <a href="{{item.path}}">{{item.name}}</a>
-  </li>
-{% endfor %}
+    <li>
+      <a href="{{ item.path }}">{{ item.name }}</a>
+    </li>
+  {% endfor %}
 </ul>
 
-<small>menu</small>
+<small><u>Menu</u></small>
 <ul>
   {% for item in collections.nav %}
   <li>
-    <a href="{{item.path}}">{{item.name}}</a>
+    <a href="{{ item.path }}">{{ item.name }}</a>
   </li>
 {% endfor %}
 </ul>
+<hr>
+<pre><code>{{layout}}</code></pre>
 
