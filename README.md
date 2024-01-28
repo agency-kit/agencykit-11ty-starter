@@ -41,3 +41,5 @@ For full list of 11ty features:
 [11ty](https://www.11ty.dev/docs/)
 
 [NotionCMS](https://www.agencykit.so/notion-cms/guide/#core-features)
+
+Minimal styling thanks to [modern normalize](https://github.com/sindresorhus/modern-normalize) and [Sakura](https://github.com/oxalorg/sakura).
