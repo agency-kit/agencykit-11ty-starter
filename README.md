@@ -6,8 +6,6 @@
 
 </p>
 
----
-
 ## Jump in
 
 Leverage the combined efficiency and power of [11ty](https://www.11ty.dev/) as your SSG and Notion-as-a-CMS, powered by [NotionCMS](https://www.agencykit.so/notion-cms/guide/).
