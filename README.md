@@ -1,28 +1,30 @@
 <p align="center">
-
   <img src="/public/agencykit-11ty-starter.png">
-
-  <h1 align="center">AgencyKit-11ty-Starter</h1>
-
+  <h1>AgencyKit-11ty-Starter</h1>
 </p>
-
-## Jump in
 
 Leverage the combined efficiency and power of [11ty](https://www.11ty.dev/) as your SSG and Notion-as-a-CMS, powered by [NotionCMS](https://www.agencykit.so/notion-cms/guide/).
 
-Grab your Notion database ID and API key from an existing integration (if you don't know how check [here](https://www.agencykit.so/notion-cms/quickstart/#create-notion-integration)), slap it into your `.env` file and you are ready to build your site quickly from Notion content.
-
-This starter automatically generates a collection for each group of pages in your Notion database hierarchy (see the [sample database structure](https://cooked-shovel-3c3.notion.site/NotionCMS-Quickstart-Database-Template-719f1f9d1547465d96bcd7e80333c831?pvs=4)).
-
-No configuration besides the `.env` is required to get started, but this is also a great jumping off point for more advanced workflows using NotionCMS plugins and custom 11ty templating and pagination.
+No configuration besides setting 2 variables in `.env` is required to get started, but this is also a great jumping off point for more advanced workflows using NotionCMS plugins and custom 11ty templating and pagination.
 
 ## Usage
 
-1. Set up your Notion database ID and Auth key in `.env`. Don't forget to set `draftMode` true if you haven't published anything.
+1. Set up your Notion database ID and API key in `.env`.
 
-2. Run 11ty.
+   ```
+   NOTION_API=your_secret_here
+   NOTION_DB_ID=your_db_id_here
+   ```
+   
+   If you've never used Notion API before, you have to set up an integration and get an API key (steps [here](https://www.agencykit.so/notion-cms/quickstart/#create-notion-integration)).
 
-```npm run --serve```
+   Then you have to set up a NotionCMS-compatible database to hold your content (you can copy [this one to start](https://cooked-shovel-3c3.notion.site/NotionCMS-Quickstart-Database-Template-719f1f9d1547465d96bcd7e80333c831?pvs=4)) and get to writing.
+  
+   Don't forget to set `draftMode` true if you haven't published anything. See full list of NotionCMS options [here](https://www.agencykit.so/notion-cms/guide/api/).
+
+3. Run 11ty.
+
+   ```npm run --serve```
 
 ## Features
 
