@@ -18,7 +18,7 @@ eleventyComputed:
 
 <small><u>Child pages</u></small>
 <ul>
-  {% for item in collections[page.slug] %}
+  {% for item in collections[page.slug] | reverse %}
     <li>
       <a href="{{ item.path }}">{{ item.name }}</a>
     </li>
