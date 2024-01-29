@@ -9,7 +9,9 @@ No configuration besides setting 2 variables in `.env` is required to get starte
 
 ## Usage
 
-1. Set up your Notion database ID and API key in `.env`.
+1. Install the packages.
+   ``` npm install ``` (or equivalent).
+3. Set up your Notion database ID and API key in `.env`.
 
    ```
    NOTION_API=your_secret_here
@@ -22,9 +24,7 @@ No configuration besides setting 2 variables in `.env` is required to get starte
   
    Don't forget to set `draftMode` true if you haven't published anything. See full list of NotionCMS options [here](https://www.agencykit.so/notion-cms/guide/api/).
 
-3. Run 11ty.
-
-   ```npm run --serve```
+4. Run 11ty. ```npm run serve```
 
 ## Features
 
