@@ -1,6 +1,6 @@
 {
   "name": "agencykit-11ty-starter",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "",
   "main": ".eleventy.js",
   "type": "module",
