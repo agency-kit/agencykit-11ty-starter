@@ -5,6 +5,33 @@
 
 Leverage the combined efficiency and power of [11ty](https://www.11ty.dev/) as your SSG and Notion-as-a-CMS, powered by [NotionCMS](https://www.agencykit.so/notion-cms/guide/).
 
+Define all of your website routes in your Notion database structure as you add content.
+
+So this structure:
+
+![NotionCMS database structure automatically defines your site's routes](/public/database_structure.png)
+
+generates these routes:
+
+```
+[
+  '/about',
+  '/team',
+  '/team/jacob',
+  '/team/mordecai',
+  '/pricing',
+  '/posts',
+  '/posts/how-to-use-notion-cms',
+  '/posts/how-to-build-a-blog-with-notion'
+]
+```
+
+Each of these paths automatically generate a page with the content on it in 11ty. 
+
+If the path has children, e.g. `team` and `posts` here, that path automatically generates a collection with the child pages in it. So the `team` collection will have `jacob` and `mordecai` pages and the `post` collection will have the posts. 
+
+This holds for any number of levels and is extremely powerful when it comes to building large website hierarchies and using the data in your collection however you need. Oh, did I mention that this happens automatically with no config?
+
 No configuration besides setting 2 variables in `.env` is required to get started, but this is also a great jumping off point for more advanced workflows using NotionCMS plugins and custom 11ty templating and pagination.
 
 ## Usage

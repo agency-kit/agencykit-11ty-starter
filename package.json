@@ -6,16 +6,19 @@
   "type": "module",
   "dependencies": {
     "@agency-kit/notion-cms": "^0.9.x",
-    "dotenv": "^16.4.1"
+    "@changesets/cli": "^2.27.1",
+    "dotenv": "^16.4.1",
+    "rimraf": "^5.0.5"
   },
   "devDependencies": {
     "@11ty/eleventy": "3.0.0-alpha.4"
   },
   "scripts": {
-    "serve": "npx @11ty/eleventy --serve",
-    "watch": "npx @11ty/eleventy --watch",
-    "build": "npx @11ty/eleventy",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "rimraf _site && npx @11ty/eleventy --serve",
+    "watch": "rimraf _site && npx @11ty/eleventy --watch",
+    "build": "rimraf _site && npx @11ty/eleventy",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "version": "changeset version"
   },
   "author": "",
   "license": "ISC"

@@ -10,6 +10,7 @@ eleventyComputed:
   layout: "{{ page.Layout }}"
 ---
 
+<img src="/agencykit-11ty-starter.png" alt="">
 <h1>{{page.name}}</h1>
 <hr>
 {% if page.content.html %}
@@ -18,7 +19,7 @@ eleventyComputed:
 
 <small><u>Child pages</u></small>
 <ul>
-  {% for item in collections[page.slug] | reverse %}
+  {% for item in collections[page.collectionName] | reverse %}
     <li>
       <a href="{{ item.path }}">{{ item.name }}</a>
     </li>
@@ -36,3 +37,10 @@ eleventyComputed:
 <hr>
 <pre><code>{{layout}}</code></pre>
 
+<span>NotionCMS Page Object:</span>
+<json-viewer data="{{page | dump }}" style="padding: 1.5rem;"/>
+
+<script>
+  const notionPage = {{page | dump | safe}};
+  console.log('[notionCMS page]:', notionPage);
+</script>
