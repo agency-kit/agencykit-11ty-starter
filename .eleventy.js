@@ -49,6 +49,8 @@ export default async function (config) {
 
   notion.walk(node => {
     // guarantee unique collection names, even if a page's slug is not unique
+    // for manual collection usage, you may want to remove this as it makes accessing the collection by the slug difficult.
+    // Just make sure you don't use identical page names in your db 😉
     const collectionName = `${node.slug}-${simpleHash(node.id)}`;
     node.collectionName = collectionName;
     // for quickly building all pages in the db, we collect them all.
@@ -68,6 +70,16 @@ export default async function (config) {
   config.addCollection('nav', () => Array.from(navCollection).flatMap(page => page));
 
   // TODO: Add collections by tags
+
+  config.addNunjucksFilter("removeEleventyProps", function (value) {
+    const eleventyProps = [
+      "outputPath", "date", "inputPath", "fileSlug", "filePathStem",
+      "outputFileExtension", "templateSyntax"
+    ];
+    let cleanObject = Object.assign({}, value);
+    eleventyProps.forEach(prop => {delete cleanObject[prop];});
+    return cleanObject;
+  });
 
   config.addPassthroughCopy({ "public": "/" });
 

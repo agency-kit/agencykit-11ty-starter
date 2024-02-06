@@ -10,7 +10,7 @@ eleventyComputed:
   layout: "{{ page.Layout }}"
 ---
 
-<img src="/agencykit-11ty-starter.png" alt="">
+<img src="/agencykit_11ty_starter.png" alt="">
 <h1>{{page.name}}</h1>
 <hr>
 {% if page.content.html %}
@@ -38,7 +38,13 @@ eleventyComputed:
 <pre><code>{{layout}}</code></pre>
 
 <span>NotionCMS Page Object:</span>
-<json-viewer data="{{page | dump }}" style="padding: 1.5rem;"/>
+<json-viewer data="{{page | removeEleventyProps | dump }}" style="padding: 1.5rem; border-radius: 1rem;"></json-viewer>
+
+<footer style="text-align: center">
+  <a href="https://www.agencykit.so/notion-cms/guide/">
+    <img src="/built_with.png" alt="">
+  </a>
+</footer>
 
 <script>
   const notionPage = {{page | dump | safe}};
