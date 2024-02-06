@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/public/agencykit-11ty-starter.png">
+  <img src="/public/agencykit_11ty_starter.png">
   <h1>AgencyKit-11ty-Starter</h1>
 </p>
 
